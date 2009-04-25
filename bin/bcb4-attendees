@@ -1,0 +1,16 @@
+#!/usr/bin/env ruby
+require 'nokogiri'
+require 'open-uri'
+require 'pp'
+require 'ruby-debug'
+
+open('http://wiki.barcampboston.org/index.php?title=2009_Registration') do |file|
+
+  doc = Nokogiri::HTML(file.read)
+
+  attendees_list = doc.css('ol')[1]
+
+  attendees_list.children.each do |attendee|
+    puts attendee.content
+  end
+end
